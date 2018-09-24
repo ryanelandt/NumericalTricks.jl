@@ -7,7 +7,7 @@ using LinearAlgebra
 @testset "div_by_zero" begin
     sv3_zero = SVector{3,Float64}(0.0, 0.0, 0.0)
     @test sv3_zero == safeNormalize(sv3_zero)
-    for k = 1:128
+    for k = 1:127
         rv = randn(SVector{3,Float64})
         @test norm(safeNormalize(rv)) ≈ 1.0
         norm_rv = norm(rv)

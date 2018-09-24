@@ -4,6 +4,9 @@ using StaticArrays
 using LinearAlgebra
 
 
+include("test_exports.jl")
+
+
 @testset "div_by_zero" begin
     sv3_zero = SVector{3,Float64}(0.0, 0.0, 0.0)
     @test sv3_zero == safeNormalize(sv3_zero)

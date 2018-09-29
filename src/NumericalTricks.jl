@@ -9,6 +9,7 @@ using Rotations
 
 include("poly_approx.jl")
 include("div_by_zero.jl")
+include("rotations.jl")
 
 export
   # poly_approx.jl

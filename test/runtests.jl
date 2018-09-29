@@ -2,6 +2,7 @@ using Test
 using NumericalTricks
 using StaticArrays
 using LinearAlgebra
+using Rotations
 
 
 include("test_exports.jl")
@@ -28,4 +29,14 @@ end
         y = fastSoftPlus.(x, center_value)
         @test 0.0 == minimum(y)
     end
+end
+
+
+@testset "rotations" begin
+    qq = Quat(1.0, 0.01, 0.02, 0.03)
+    rv = RodriguesVec(qq)
+    rv_sv = SVector(rv.sx, rv.sy, rv.sz)
+    rv_cheap = cheapRV(qq)
+    rel_err = (rv_sv - rv_cheap) ./ rv_sv
+    @test all(rel_err .< 1.0e-3)
 end

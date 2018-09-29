@@ -4,6 +4,7 @@ module NumericalTricks
 
 using StaticArrays
 using LinearAlgebra
+using Rotations
 
 
 include("poly_approx.jl")
@@ -17,6 +18,10 @@ export
   # div_by_zero.jl
   safeNorm,
   safeInvNorm,
-  safeNormalize
+  safeNormalize,
+
+  # rotations.jl
+  quatErr,
+  cheapRV
 
 end

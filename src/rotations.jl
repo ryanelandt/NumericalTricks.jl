@@ -6,3 +6,4 @@ function quatErr(q1::Quat{TD}, qRef::Quat{TD}) where {TD}
 end
 
 cheapRV(q::Quat) = 2 * quatErr(q)
+cheapRV(spq::SPQuat) = cheapRV(Quat(spq))

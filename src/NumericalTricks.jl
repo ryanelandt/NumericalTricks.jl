@@ -20,7 +20,8 @@ export
   # div_by_zero.jl
   # safeNorm,
   # safeInvNorm,
-  safeNormalize,
+  safe_normalize,
+  safe_inv_norm_2,
 
   # rotations.jl
   quatErr,

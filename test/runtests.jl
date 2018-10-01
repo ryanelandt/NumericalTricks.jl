@@ -10,10 +10,11 @@ include("test_exports.jl")
 
 @testset "div_by_zero" begin
     sv3_zero = SVector{3,Float64}(0.0, 0.0, 0.0)
-    @test sv3_zero == safeNormalize(sv3_zero)
+    @test sv3_zero == safe_normalize(sv3_zero)
     for k = 1:127
         rv = randn(SVector{3,Float64})
-        @test norm(safeNormalize(rv)) ≈ 1.0
+        @test norm(safe_normalize(rv)) ≈ 1.0
+        @test safe_inv_norm_2(rv) ≈ (1 / norm(rv))^2
         # norm_rv = norm(rv)
         # @test safeNorm(rv) ≈ norm_rv
         # @test safeInvNorm(rv) ≈ 1 / norm_rv

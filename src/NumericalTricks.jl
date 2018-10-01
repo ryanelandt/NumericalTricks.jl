@@ -18,8 +18,8 @@ export
   fastSigmoid,
 
   # div_by_zero.jl
-  safeNorm,
-  safeInvNorm,
+  # safeNorm,
+  # safeInvNorm,
   safeNormalize,
 
   # rotations.jl

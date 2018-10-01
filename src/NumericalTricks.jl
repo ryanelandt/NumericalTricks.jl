@@ -5,6 +5,7 @@ module NumericalTricks
 using StaticArrays
 using LinearAlgebra
 using Rotations
+using ForwardDiff: Dual
 
 
 include("poly_approx.jl")

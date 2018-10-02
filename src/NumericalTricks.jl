@@ -21,7 +21,8 @@ export
   # safeNorm,
   # safeInvNorm,
   safe_normalize,
-  safe_inv_norm_2,
+  safe_inv_norm_squared,
+  norm_squared,
 
   # rotations.jl
   quatErr,

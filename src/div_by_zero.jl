@@ -8,10 +8,16 @@ function safe_normalize(v::SVector{3,Float64})
     n2 = muladd(v[3], v[3], n2)
     return v * (1 / sqrt(n2))
 end
-function safe_normalize(v::SVector{3,Dual{Float64,Float64,N}}) where N
+
+@inline function norm_squared(v::SVector{3,T}) where T
     n2 = v[1]^2
     n2 = muladd(v[2], v[2], n2)
     n2 = muladd(v[3], v[3], n2)
+    return n2
+end
+
+function safe_normalize(v::SVector{3,Dual{Float64,Float64,N}}) where N
+    n2 = norm_squared(v)
     if n2 != 0.0
         return v * (1 / sqrt(n2))
     else
@@ -19,9 +25,7 @@ function safe_normalize(v::SVector{3,Dual{Float64,Float64,N}}) where N
     end
 end
 
-function safe_inv_norm_2(v::SVector{3,T}) where {T}
-    n2 = v[1]^2
-    n2 = muladd(v[2], v[2], n2)
-    n2 = muladd(v[3], v[3], n2)
+function safe_inv_norm_squared(v::SVector{3,T}) where {T}
+    n2 = norm_squared(v)
     return ifelse(n2 == 0.0, 0.0, 1 / n2)
 end

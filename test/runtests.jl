@@ -14,10 +14,8 @@ include("test_exports.jl")
     for k = 1:127
         rv = randn(SVector{3,Float64})
         @test norm(safe_normalize(rv)) ≈ 1.0
-        @test safe_inv_norm_2(rv) ≈ (1 / norm(rv))^2
-        # norm_rv = norm(rv)
-        # @test safeNorm(rv) ≈ norm_rv
-        # @test safeInvNorm(rv) ≈ 1 / norm_rv
+        @test safe_inv_norm_squared(rv) ≈ (1 / norm(rv))^2
+        @test norm_squared(rv) ≈ norm(rv)^2
     end
 end
 

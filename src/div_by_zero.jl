@@ -29,3 +29,9 @@ function safe_inv_norm_squared(v::SVector{3,T}) where {T}
     n2 = norm_squared(v)
     return ifelse(n2 == 0.0, 0.0, 1 / n2)
 end
+
+function safe_scalar_divide(a::T, b::T) where {T}
+    (b != 0.0) && (return a / b)
+    (a == 0.0) && (return zero(T))
+    error("attempted to divide non-zero $a by zero $b you should not do this")
+end

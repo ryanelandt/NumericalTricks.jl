@@ -18,11 +18,10 @@ export
   fastSigmoid,
 
   # div_by_zero.jl
-  # safeNorm,
-  # safeInvNorm,
   safe_normalize,
   safe_inv_norm_squared,
   norm_squared,
+  safe_scalar_divide,
 
   # rotations.jl
   quatErr,

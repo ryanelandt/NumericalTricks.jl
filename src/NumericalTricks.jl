@@ -16,6 +16,7 @@ export
   # poly_approx.jl
   fastSoftPlus,
   fastSigmoid,
+  soft_clamp,
 
   # div_by_zero.jl
   safe_normalize,

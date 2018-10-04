@@ -11,6 +11,7 @@ using ForwardDiff: Dual
 include("poly_approx.jl")
 include("div_by_zero.jl")
 include("rotations.jl")
+include("vector_projections.jl")
 
 export
   # poly_approx.jl
@@ -25,6 +26,10 @@ export
 
   # rotations.jl
   quatErr,
-  cheapRV
+  cheapRV,
+
+  # vector_projections.jl
+  vec_proj,
+  vec_sub_vec_proj
 
 end

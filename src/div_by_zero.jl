@@ -9,7 +9,7 @@ function safe_normalize(v::SVector{3,Float64})
     return v * (1 / sqrt(n2))
 end
 
-@inline function norm_squared(v::SVector{3,T}) where T
+function norm_squared(v::SVector{3,T}) where T
     n2 = v[1]^2
     n2 = muladd(v[2], v[2], n2)
     n2 = muladd(v[3], v[3], n2)

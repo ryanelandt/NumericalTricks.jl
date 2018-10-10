@@ -1,6 +1,3 @@
-# safeNorm(v::SVector{3,T}) where {T} = sqrt(dot(v, v) + 1.0e-66)
-# safeInvNorm(v::SVector{3,T}) where {T} = 1 / safeNorm(v)
-# safeNormalize(v::SVector{3,T}) where {T} = v * safeInvNorm(v)
 
 function safe_normalize(v::SVector{3,Float64})
     n2 = muladd(v[1], v[1], 1.0e-66)
@@ -16,7 +13,7 @@ function norm_squared(v::SVector{3,T}) where T
     return n2
 end
 
-function safe_normalize(v::SVector{3,Dual{Float64,Float64,N}}) where N
+function safe_normalize(v::SVector{3,Dual{Type_Tag,Float64,N}}) where {Type_Tag, N}
     n2 = norm_squared(v)
     if n2 != 0.0
         return v * (1 / sqrt(n2))

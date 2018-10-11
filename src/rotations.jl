@@ -9,4 +9,4 @@ cheapRV(q::Quat) = 2 * quatErr(q)
 cheapRV(spq::SPQuat) = cheapRV(Quat(spq))
 
 components(q::Quat{T}) where {T} = SVector{4,T}(q.w, q.x, q.y, q.z)
-components(spq::SPQuat{T}) where {T} = SVector{3,T}(q.x, q.y, q.z)
+components(spq::SPQuat{T}) where {T} = SVector{3,T}(spq.x, spq.y, spq.z)

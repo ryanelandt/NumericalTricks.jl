@@ -28,6 +28,7 @@ export
   # rotations.jl
   quatErr,
   cheapRV,
+  components,
 
   # vector_projections.jl
   vec_proj,

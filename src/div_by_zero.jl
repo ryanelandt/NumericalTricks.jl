@@ -13,6 +13,16 @@ function norm_squared(v::SVector{3,T}) where T
     return n2
 end
 
+safe_norm(v::SVector{3,Float64}) = sqrt(norm_squared(v))
+function safe_norm(v::SVector{3,T}) where {T}
+    n2 = norm_squared(v)
+    if n2 != 0.0
+        return sqrt(n2)
+    else
+        return zero(T)
+    end
+end
+
 function safe_normalize(v::SVector{3,Dual{Type_Tag,Float64,N}}) where {Type_Tag, N}
     n2 = norm_squared(v)
     if n2 != 0.0
@@ -24,6 +34,11 @@ end
 
 function safe_inv_norm_squared(v::SVector{3,T}) where {T}
     n2 = norm_squared(v)
+    return ifelse(n2 == 0.0, 0.0, 1 / n2)
+end
+
+function safe_inv_norm(v::SVector{3,T}) where {T}
+    n2 = norm(v)
     return ifelse(n2 == 0.0, 0.0, 1 / n2)
 end
 

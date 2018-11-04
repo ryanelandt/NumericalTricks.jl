@@ -5,7 +5,7 @@ module NumericalTricks
 using StaticArrays
 using LinearAlgebra
 using Rotations
-using ForwardDiff: Dual
+using ForwardDiff: Dual, value
 
 
 include("poly_approx.jl")
@@ -27,6 +27,10 @@ export
   safe_norm,
   norm_squared,
   safe_scalar_divide,
+  unsafe_norm,
+  unsafe_inv_norm,
+
+
 
   # rotations.jl
   quatErr,

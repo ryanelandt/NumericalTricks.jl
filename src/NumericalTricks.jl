@@ -12,6 +12,7 @@ include("poly_approx.jl")
 include("div_by_zero.jl")
 include("rotations.jl")
 include("vector_projections.jl")
+include("matrix_factor_derivatives.jl")
 
 export
   # poly_approx.jl
@@ -30,8 +31,6 @@ export
   unsafe_norm,
   unsafe_inv_norm,
 
-
-
   # rotations.jl
   quatErr,
   cheapRV,
@@ -39,6 +38,9 @@ export
 
   # vector_projections.jl
   vec_proj,
-  vec_sub_vec_proj
+  vec_sub_vec_proj,
+
+  # matrix_factor_derivatives.jl
+  cholesky_U_deravitive
 
 end

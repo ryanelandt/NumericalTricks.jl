@@ -13,6 +13,8 @@ include("div_by_zero.jl")
 include("rotations.jl")
 include("vector_projections.jl")
 include("matrix_factor_derivatives.jl")
+include("utility.jl")
+
 
 export
   # poly_approx.jl
@@ -41,6 +43,10 @@ export
   vec_sub_vec_proj,
 
   # matrix_factor_derivatives.jl
-  cholesky_U_deravitive
+  cholesky_U_deravitive,
+  
+  # utility.jl
+  first_3_of_6,
+  last_3_of_6
 
 end

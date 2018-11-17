@@ -11,6 +11,12 @@ include("test_div_by_zero.jl")
 include("test_matrix_factor_derivatives.jl")
 
 
+@testset "3_of_6" begin
+    a = SVector{6,Float64}(1,2,3,4,5,6)
+    @test all(first_3_of_6(a) .== SVector{3,Float64}(1,2,3))
+    @test all(last_3_of_6(a) .== SVector{3,Float64}(4,5,6))
+end
+
 @testset "poly_approx" begin
     # fastSoftPlus
     for center_value = [0.1, 0.25, 0.5, 1.0, 2.0]

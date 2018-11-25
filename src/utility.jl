@@ -10,3 +10,11 @@ function getTop(a::SMatrix{4,4,T,16}) where {T}
     ]
     return A
 end
+
+unPad(a::SVector{4,T}) where {T} = SVector{3,T}(a[1], a[2], a[3])
+unPad(a::SMatrix{1,4,T,4}) where {T} = SVector{3,T}(a[1], a[2], a[3])
+onePad(a::SVector{3,T}) where {T} = SVector{4,T}(a[1], a[2], a[3], one(T))
+zeroPad(a::SVector{3,T}) where {T} = SVector{4,T}(a[1], a[2], a[3], zero(T))
+
+@inline mul_then_un_pad(m::SMatrix{4,4,T1,16}, v::SVector{4,T2}) where {T1,T2} = unPad(m * v)
+@inline one_pad_then_mul(m::SMatrix{4,4,T1,16}, v::SVector{3,T2}) where {T1,T2} = m * onePad(v)

@@ -50,6 +50,9 @@ export
   first_3_of_6,
   last_3_of_6,
   getTop,
+  unPad,
+  onePad,
+  zeroPad,
 
   # basic_dh.jl
   basic_dh,

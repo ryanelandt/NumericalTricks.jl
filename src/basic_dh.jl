@@ -50,3 +50,5 @@ end
 Base.:*(a::basic_dh, b::basic_dh) = basic_dh(a.mat * b.mat)
 
 Base.one(::Type{basic_dh{T}}) where {T} = basic_dh(one(SMatrix{4,4,T,16}))
+
+dh_vector_mul(dh::basic_dh{T1}, v::SVector{3,T2}) where {T1,T2} = unPad(dh.mat * onePad(v))

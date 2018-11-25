@@ -57,6 +57,7 @@ export
   # basic_dh.jl
   basic_dh,
   dh_R_t,
-  povray_12
+  povray_12,
+  dh_vector_mul
 
 end

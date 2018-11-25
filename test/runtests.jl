@@ -9,6 +9,7 @@ using ForwardDiff: Partials, Dual, value
 include("test_exports.jl")
 include("test_div_by_zero.jl")
 include("test_matrix_factor_derivatives.jl")
+include("test_basic_dh.jl")
 
 
 @testset "3_of_6" begin

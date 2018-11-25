@@ -53,6 +53,8 @@ export
   unPad,
   onePad,
   zeroPad,
+  mul_then_un_pad,
+  one_pad_then_mul,
 
   # basic_dh.jl
   basic_dh,

@@ -48,3 +48,5 @@ function povray_12(a::basic_dh)
 end
 
 Base.:*(a::basic_dh, b::basic_dh) = basic_dh(a.mat * b.mat)
+
+Base.one(::Type{basic_dh{T}}) where {T} = basic_dh(one(SMatrix{4,4,T,16}))

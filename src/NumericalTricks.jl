@@ -55,6 +55,7 @@ export
   zeroPad,
   mul_then_un_pad,
   one_pad_then_mul,
+  weightPoly,
 
   # basic_dh.jl
   basic_dh,

@@ -18,3 +18,10 @@ zeroPad(a::SVector{3,T}) where {T} = SVector{4,T}(a[1], a[2], a[3], zero(T))
 
 @inline mul_then_un_pad(m::SMatrix{4,4,T1,16}, v::SVector{4,T2}) where {T1,T2} = unPad(m * v)
 @inline one_pad_then_mul(m::SMatrix{4,4,T1,16}, v::SVector{3,T2}) where {T1,T2} = m * onePad(v)
+
+function weightPoly(p1::SVector{N,T}, p2::SVector{N,T}, w1::T, w2::T) where {N,T}
+  sum_weight = w1 - w2
+  c1 = w1 / sum_weight
+  c2 = w2 / sum_weight
+  return c1 * p2 - c2 * p1
+end

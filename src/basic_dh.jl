@@ -32,8 +32,8 @@ end
 
 function dh_R_t(a::basic_dh{T}) where {T}
     a_top = getTop(a.mat)
-    t = a_top[10:12]
-    R = SMatrix{3,3,T,9}(a_top[1:9])
+    t = SVector{3,T}(a_top[10], a_top[11], a_top[12])
+    R = SMatrix{3,3,T,9}(a_top[1], a_top[2], a_top[3], a_top[4], a_top[5], a_top[6], a_top[7], a_top[8], a_top[9])
     return R, t
 end
 

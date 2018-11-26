@@ -28,4 +28,7 @@
     # Matrix
     @test sm44_I == basic_dh(sm44_I).mat
 
+    @test R isa SMatrix{3,3,Float64,9}
+    @test t isa SVector{3,Float64}
+
 end

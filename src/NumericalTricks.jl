@@ -8,6 +8,7 @@ using Rotations
 using ForwardDiff: Dual, value
 
 
+include("geometry_kernel.jl")
 include("poly_approx.jl")
 include("div_by_zero.jl")
 include("rotations.jl")
@@ -18,6 +19,13 @@ include("basic_dh.jl")
 
 
 export
+  # geometry_kernel.jl
+  area,
+  centroid,
+  triangleCross,
+  triangleNormal,
+  volume,
+
   # poly_approx.jl
   fastSoftPlus,
   fastSigmoid,
@@ -56,8 +64,6 @@ export
   mul_then_un_pad,
   one_pad_then_mul,
   weightPoly,
-  triangleCross,
-  triangleNormal,
 
   # basic_dh.jl
   basic_dh,

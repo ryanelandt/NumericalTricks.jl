@@ -25,3 +25,16 @@ function weightPoly(p1::SVector{N,T}, p2::SVector{N,T}, w1::T, w2::T) where {N,T
   c2 = w2 / sum_weight
   return c1 * p2 - c2 * p1
 end
+
+triangleCross(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T} = cross(v2 - v1, v3 - v2)
+triangleNormal(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T} = normalize(triangleCross(v1, v2, v3))
+for funName in (:triangleNormal, :triangleCross)
+    @eval begin
+        function $funName(sv::SVector{3,SVector{3,T}}) where {T}
+            return $funName(sv[1], sv[2], sv[3])
+        end
+        function $funName(sv::NTuple{3,SVector{3,T}}) where {T}
+            return $funName(sv[1], sv[2], sv[3])
+        end
+    end
+end

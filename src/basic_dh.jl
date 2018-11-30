@@ -24,6 +24,14 @@ struct basic_dh{T}
                                    t[1],    t[2],    t[3],  one(T))
         return new{T}(mat)
     end
+    function basic_dh(R::SMatrix{3,3,T,9}) where {T}
+        R = R[:]
+        mat = SMatrix{4,4,T,16}(   R[1],    R[2],    R[3], zero(T),
+                                   R[4],    R[5],    R[6], zero(T),
+                                   R[7],    R[8],    R[9], zero(T),
+                                zero(T), zero(T), zero(T), one(T))
+        return new{T}(mat)
+    end
     function basic_dh(mat::SMatrix{4,4,T,16}) where {T}
         return new{T}(mat)
     end

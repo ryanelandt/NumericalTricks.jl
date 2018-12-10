@@ -1,17 +1,17 @@
 function fastSoftPlus(x::T, k::Float64=1.0) where {T}
-  # This function is designed to ALWAYS produce non-negative output
-  (x <= -k) && (return zero(T))
-  (k <= x) && (return x)
-  return (k + x)^3 * (3*k - x) / (16*k^3)
+    # This function is designed to ALWAYS produce non-negative output
+    (x <= -k) && (return zero(T))
+    (k <= x) && (return x)
+    return (k + x)^3 * (3*k - x) / (16*k^3)
 end
 
 function fastSigmoid(x::T) where {T}
-  # This function assumes that x is non-negative.
-  (0.16666666666666666 <= x) && (return one(T))
-  x2 = x * x
-  x3 = x * x2
-  x5 = x3 * x2
-  return 11.25 * x - 270.0 * x3 + 2916.0 * x5
+    # This function assumes that x is non-negative.
+    (0.16666666666666666 <= x) && (return one(T))
+    x2 = x * x
+    x3 = x * x2
+    x5 = x3 * x2
+    return 11.25 * x - 270.0 * x3 + 2916.0 * x5
 end
 
 function soft_clamp(x::T, bound::T) where {T}
@@ -48,4 +48,99 @@ function soft_clamp_normalized(x̄::T, x::T, bound::T) where {T}
     x2 = x̄ * x̄
     poly = x2 * (x2 * 0.5 - 2 * x̄ + Float64(9/4)) + Float64(5/32)
     return bound * poly
-  end
+end
+
+
+#############################################################
+
+
+smooth_c1_ramp(v1::T, v2::T) where {T} = v2 * smooth_c1_ramp(safe_scalar_divide(v1, v2))
+function smooth_c1_ramp(t::T) where {T}
+    # y(t) = 1.5 * t - 0.5 * t^3 -- satisfies the following derivative conditions
+    #
+    #  0 = y(0) = ÿ(0) = ẏ(1) = ẏ(-1)
+    #  1 = y(1)
+    # -1 = y(-1)
+
+    if 1 <= abs(t)
+        return sign(t) * one(T)
+    else
+        return 0.5 * t * (3 - t * t)
+    end
+end
+
+smooth_c2_ramp(v1::T, v2::T) where {T} = v2 * smooth_c2_ramp(safe_scalar_divide(v1, v2))
+function smooth_c2_ramp(t::T) where {T}
+    # y(t) = 1.875 * t - 1.25 * t^3 + 0.375 * t^5 -- satisfies the following derivative conditions
+    #
+    #  0 = y(0) = ÿ(0) = y⁴(0) = ẏ(1) = ẏ(-1) = ÿ(1) = ÿ(-1)
+    #  1 = y(1)
+    # -1 = y(-1)
+
+    if 1 <= abs(t)
+        return sign(t) * one(T)
+    else
+        t² = t * t
+        return 0.125 * t * (15 + t² * (3 * t² - 10))
+    end
+end
+
+# # y = d + c 1 x + b 1 x^2 + a 1 x^3  -- 0
+# # y = 0 + c 1   + b 2 x   + a 3 x^2  -- 1
+# # y = 0 +   0   + b 2     + a 6 x    -- 2
+#
+# using UnicodePlots
+# using LinearAlgebra
+#
+#
+# function the_coe(poly_len::Int64, n_to_go::Int64)
+#     if n_to_go == 0
+#         return 1
+#     else
+#         return (poly_len - 1) * the_coe(poly_len - 1, n_to_go - 1)
+#     end
+# end
+# function the_formula(t::Float64, d::Int64, k::Int64)
+#     the_deg = k - 1 - d
+#     if the_deg == 0
+#         t_pow = 1.0
+#     elseif the_deg <= -1
+#         t_pow = 0.0
+#     else
+#         t_pow = t ^ the_deg
+#     end
+#     the_coe(k, d) * t_pow
+# end
+# expand_poly_at(c, d::Int64, t::Float64) = [c[k] * the_formula(t, d, k) for k = 1:n]
+# eval_poly_at(c, d::Int64, t::Float64) = sum(expand_poly_at(c, d, t))
+# function add_thing(c_, d::Int64, t, b_)
+#     push!(A, expand_poly_at(c_, d, t))
+#     push!(b, b_)
+#     return nothing
+# end
+#
+# n = 6
+# c0 = [1 for k = 1:n]
+# A = Vector{Vector{Float64}}()
+# b = zeros(0)
+# t_1 = 1.0
+# add_thing(c0, 0, 0.0, 0.0)
+# add_thing(c0, 2, 0.0, 0.0)
+# add_thing(c0, 0, t_1, sign(t_1))
+# add_thing(c0, 1, t_1, 0.0)
+# add_thing(c0, 4, 0.0, 0.0)  # second order only
+# add_thing(c0, 2, t_1, 0.0)  # second order only
+#
+# A = vcat(A'...)
+# c = A \ b
+#
+# t_space = collect(LinRange(0.0, t_1, 100))
+# y_eval = eval_poly_at.([c], 0, t_space)
+#
+# myPlot = lineplot(t_space, y_eval)
+# println(myPlot)
+# println(c)
+#
+# t_space = collect(LinRange(-1.5, 1.5, 100))
+# myPlot = lineplot(t_space, smooth_c2_ramp.(t_space))
+# println(myPlot)

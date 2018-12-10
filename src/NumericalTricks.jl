@@ -30,6 +30,8 @@ export
   fastSoftPlus,
   fastSigmoid,
   soft_clamp,
+  smooth_c1_ramp,
+  smooth_c2_ramp,
 
   # div_by_zero.jl
   safe_normalize,

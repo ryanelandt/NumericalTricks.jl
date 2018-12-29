@@ -25,3 +25,10 @@ function weightPoly(p1::SVector{N,T}, p2::SVector{N,T}, w1::T, w2::T) where {N,T
   c2 = w2 / sum_weight
   return c1 * p2 - c2 * p1
 end
+
+function make_pd_gains(time_settle::Float64, damping::Float64=1.0)
+    w_n = 2 * pi / time_settle
+    p = w_n^2
+    d = 2 * damping * w_n
+    return p, d
+end

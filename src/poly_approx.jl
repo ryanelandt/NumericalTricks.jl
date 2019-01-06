@@ -5,13 +5,31 @@ function fastSoftPlus(x::T, k::Float64=1.0) where {T}
     return (k + x)^3 * (3*k - x) / (16*k^3)
 end
 
-function fastSigmoid(x::T) where {T}
-    # This function assumes that x is non-negative.
-    (0.16666666666666666 <= x) && (return one(T))
+function fastSigmoid(x_::T, x_sat⁻¹::Float64=6.0) where {T}
+    # using SymPy
+    # using LinearAlgebra
+    #
+    # @syms x a0 a1 a2 a3 a4 a5 x_cut real=true
+    #
+    # p_0 = a1*x + a3*x^3 + a5*x^5
+    # p_1 = diff(p_0, x, 1)
+    # p_2 = diff(p_1, x, 1)
+    #
+    # e1 = subs(p_0 - 1, x, x_cut)
+    # e2 = subs(p_1 - 0, x, x_cut)
+    # e3 = subs(p_2 - 0, x, x_cut)
+    #
+    # A,B = SymPy.sympy["linear_eq_to_matrix"]([e1, e2, e3], a1, a3, a5)
+    # c = A \ B
+    #
+    # p = dot(c, [x^k for k = 1:2:5])
+    # println("    poly = ", p)
+
+    x = x_ * x_sat⁻¹
+    x = clamp(x, -one(T), one(T))
     x2 = x * x
-    x3 = x * x2
-    x5 = x3 * x2
-    return 11.25 * x - 270.0 * x3 + 2916.0 * x5
+    term = muladd(0.375, x2, -1.25)
+    return x * muladd(term, x2, +1.875)
 end
 
 function soft_clamp(x::T, bound::T) where {T}
@@ -84,6 +102,17 @@ function smooth_c2_ramp(t::T) where {T}
         return 0.125 * t * (15 + t² * (3 * t² - 10))
     end
 end
+
+
+function fastSigmoid(x::T) where {T}
+    # This function assumes that x is non-negative.
+    (0.16666666666666666 <= x) && (return one(T))
+    x2 = x * x
+    x3 = x * x2
+    x5 = x3 * x2
+    return 11.25 * x - 270.0 * x3 + 2916.0 * x5
+end
+
 
 # # y = d + c 1 x + b 1 x^2 + a 1 x^3  -- 0
 # # y = 0 + c 1   + b 2 x   + a 3 x^2  -- 1

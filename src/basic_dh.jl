@@ -24,6 +24,14 @@ struct basic_dh{T}
                                    t[1],    t[2],    t[3],  one(T))
         return new{T}(mat)
     end
+    function basic_dh(R::SMatrix{3,3,T,9}, t::SVector{3,T}) where {T}
+        R = R[:]
+        mat = SMatrix{4,4,T,16}(   R[1],    R[2],    R[3], zero(T),
+                                   R[4],    R[5],    R[6], zero(T),
+                                   R[7],    R[8],    R[9], zero(T),
+                                   t[1],    t[2],    t[3],  one(T))
+        return new{T}(mat)
+    end
     function basic_dh(R::SMatrix{3,3,T,9}) where {T}
         R = R[:]
         mat = SMatrix{4,4,T,16}(   R[1],    R[2],    R[3], zero(T),
@@ -36,7 +44,6 @@ struct basic_dh{T}
         return new{T}(mat)
     end
 end
-
 
 function dh_R_t(a::basic_dh{T}) where {T}
     a_top = getTop(a.mat)
@@ -56,6 +63,11 @@ function povray_12(a::basic_dh)
 end
 
 Base.:*(a::basic_dh, b::basic_dh) = basic_dh(a.mat * b.mat)
+
+function Base.inv(a::basic_dh)
+    R, t = dh_R_t(a)
+    return basic_dh(R', -R' * t)
+end
 
 Base.one(::Type{basic_dh{T}}) where {T} = basic_dh(one(SMatrix{4,4,T,16}))
 

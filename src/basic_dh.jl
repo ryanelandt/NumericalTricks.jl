@@ -1,4 +1,7 @@
 
+"""
+A structure that is assumed to hold a homogenous transform.
+"""
 struct basic_dh{T}
     mat::SMatrix{4,4,T,16}
     function basic_dh(t::SVector{3,T}) where {T}
@@ -45,6 +48,9 @@ struct basic_dh{T}
     end
 end
 
+"""
+Extracts the rotational and translational part of the transformation matrix.
+"""
 function dh_R_t(a::basic_dh{T}) where {T}
     a_top = getTop(a.mat)
     t = SVector{3,T}(a_top[10], a_top[11], a_top[12])

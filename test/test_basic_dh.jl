@@ -4,6 +4,8 @@
     zero_3 = zeros(SVector{3,Float64})
     rot_I = one(RotMatrix{3,Float64})
     sm44_I = one(SMatrix{4,4,Float64,16})
+    sm33_I = one(SMatrix{3,3,Float64,9})
+    sm33_rand = rand(SMatrix{3,3,Float64,9})
     rot_rand = rand(RotMatrix{3,Float64})
     t_rand = rand(SVector{3,Float64})
 
@@ -30,5 +32,27 @@
 
     @test R isa SMatrix{3,3,Float64,9}
     @test t isa SVector{3,Float64}
+
+    # SMatrix and Translation
+    @test sm44_I == basic_dh(sm33_I, zero_3).mat
+    R, t = dh_R_t(basic_dh(sm33_rand, t_rand))
+    @test R == sm33_rand
+    @test t == t_rand
+
+    # SMatrix only
+    @test sm44_I == basic_dh(sm33_I).mat
+    R, t = dh_R_t(basic_dh(sm33_rand))
+    @test R == sm33_rand
+    @test t == zero_3
+
+    # inverse
+    dh_rand = basic_dh(rot_rand, t_rand)
+    @test inv(dh_rand).mat ≈ inv(dh_rand.mat)
+
+    # multiply
+    @test dh_rand.mat * dh_rand.mat ≈ (dh_rand * dh_rand).mat
+
+    # povray_12
+    @test all( povray_12(dh_rand) .== SVector(rot_rand..., t_rand...) )
 
 end

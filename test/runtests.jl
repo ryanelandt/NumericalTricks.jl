@@ -12,6 +12,7 @@ include("test_div_by_zero.jl")
 include("test_basic_dh.jl")
 include("test_geometry_kernel.jl")
 include("test_poly_approx.jl")
+include("test_utility.jl")
 
 
 @testset "3_of_6" begin

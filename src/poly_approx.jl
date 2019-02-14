@@ -68,9 +68,7 @@ function soft_clamp_normalized(x̄::T, x::T, bound::T) where {T}
     return bound * poly
 end
 
-
 #############################################################
-
 
 smooth_c1_ramp(v1::T, v2::T) where {T} = v2 * smooth_c1_ramp(safe_scalar_divide(v1, v2))
 function smooth_c1_ramp(t::T) where {T}
@@ -104,14 +102,14 @@ function smooth_c2_ramp(t::T) where {T}
 end
 
 
-function fastSigmoid(x::T) where {T}
-    # This function assumes that x is non-negative.
-    (0.16666666666666666 <= x) && (return one(T))
-    x2 = x * x
-    x3 = x * x2
-    x5 = x3 * x2
-    return 11.25 * x - 270.0 * x3 + 2916.0 * x5
-end
+# function fastSigmoid(x::T) where {T}
+#     # This function assumes that x is non-negative.
+#     (0.16666666666666666 <= x) && (return one(T))
+#     x2 = x * x
+#     x3 = x * x2
+#     x5 = x3 * x2
+#     return 11.25 * x - 270.0 * x3 + 2916.0 * x5
+# end
 
 
 # # y = d + c 1 x + b 1 x^2 + a 1 x^3  -- 0

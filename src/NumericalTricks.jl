@@ -13,7 +13,6 @@ include("poly_approx.jl")
 include("div_by_zero.jl")
 include("rotations.jl")
 include("vector_projections.jl")
-# include("matrix_factor_derivatives.jl")
 include("utility.jl")
 include("basic_dh.jl")
 
@@ -39,7 +38,7 @@ export
   safe_inv_norm_squared,
   safe_inv_norm,
   safe_norm,
-  norm_squared,
+  norm²,
   safe_scalar_divide,
   unsafe_norm,
   unsafe_inv_norm,
@@ -52,9 +51,6 @@ export
   # vector_projections.jl
   vec_proj,
   vec_sub_vec_proj,
-
-  # # matrix_factor_derivatives.jl
-  # cholesky_U_deravitive,
 
   # utility.jl
   first_3_of_6,

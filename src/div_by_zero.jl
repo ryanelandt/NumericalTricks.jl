@@ -40,8 +40,8 @@ safe_normalize(v::SVector{3,T}) where {T} = v * safe_inv_norm(v)
 ### unsafe_normalize
 unsafe_normalize(v::SVector{3,T}) where {T} = v * unsafe_inv_norm(v)
 
-### safe_inv_norm_squared
-function safe_inv_norm_squared(v::SVector{3,T}) where {T}
+### safe_inv_norm²
+function safe_inv_norm²(v::SVector{3,T}) where {T}
     n2 = norm²(v)
     return ifelse(n2 == 0.0, zero(T), 1.0 / n2)
 end

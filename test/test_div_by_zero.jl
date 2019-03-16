@@ -42,20 +42,20 @@ end
         @test !is_nan_in_partials(safe_inv_norm(sv3_zero))
         @test sv3_zero == safe_normalize(sv3_zero)
         @test !is_nan_in_partials(safe_normalize(sv3_zero))
-        @test !is_nan_in_partials(safe_inv_norm_squared(sv3_zero))
+        @test !is_nan_in_partials(safe_inv_norm²(sv3_zero))
         for k = 1:128
             rv = rand_sv3(d_type)
             rv_norm = norm(rv)
             inv_rv_norm = 1 ./ rv_norm
             rv_normalize = rv .* inv_rv_norm
-            @test norm_squared(rv) ≈ rv_norm^2
+            @test norm²(rv) ≈ rv_norm^2
             @test unsafe_norm(rv) ≈ rv_norm
             @test safe_norm(rv) ≈ rv_norm
             @test unsafe_inv_norm(rv) ≈ inv_rv_norm
             @test safe_inv_norm(rv) ≈ inv_rv_norm
             @test safe_normalize(rv) ≈ rv_normalize
             @test unsafe_normalize(rv) ≈ rv_normalize
-            @test safe_inv_norm_squared(rv) ≈ inv_rv_norm^2
+            @test safe_inv_norm²(rv) ≈ inv_rv_norm^2
         end
     end
 end
@@ -64,8 +64,8 @@ end
     for d_type = [Float64, T]
         rv = rand_sv3(d_type)
         rv_0 = rand_sv3_zero(d_type)
-        for fun_name = [norm_squared, unsafe_norm, safe_norm, unsafe_inv_norm, safe_inv_norm, safe_normalize,
-            unsafe_normalize, safe_inv_norm_squared]
+        for fun_name = [norm², unsafe_norm, safe_norm, unsafe_inv_norm, safe_inv_norm, safe_normalize,
+            unsafe_normalize, safe_inv_norm²]
 
             ans_1 = fun_name(rv)
             ans_2 = fun_name(rv_0)

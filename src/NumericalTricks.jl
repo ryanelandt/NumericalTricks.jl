@@ -35,7 +35,7 @@ export
   # div_by_zero.jl
   safe_normalize,
   unsafe_normalize,
-  safe_inv_norm_squared,
+  safe_inv_norm²,
   safe_inv_norm,
   safe_norm,
   norm²,

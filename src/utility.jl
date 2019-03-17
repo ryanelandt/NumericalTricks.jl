@@ -31,3 +31,11 @@ function make_pd_gains(time_settle::Float64, damping::Float64=1.0)
     d = 2 * damping * w_n
     return p, d
 end
+
+"""
+Creates a random positive definite SMatrix for a size.
+"""
+function rand_pd(n::Int64)
+    USV = svd(randn(SMatrix{n,n,Float64,n^2}))
+    return Hermitian(USV.U * Diagonal(SVector(USV.S)) * USV.U')
+end

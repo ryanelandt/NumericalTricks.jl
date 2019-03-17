@@ -12,4 +12,10 @@
     p, d = make_pd_gains(1*pi, 1.0)
     @test p == 4.0
     @test d == 4.0
+
+    for k = 1:8
+        pd33 = rand_pd(k)
+        @test (isa(pd33, Hermitian{Float64,SMatrix{k,k,Float64,k^2}}))
+        @test (0.0 < minimum(eigen(pd33).values))
+    end
 end

@@ -63,6 +63,7 @@ export
   one_pad_then_mul,
   weightPoly,
   make_pd_gains,
+  rand_pd,
 
   # basic_dh.jl
   basic_dh,

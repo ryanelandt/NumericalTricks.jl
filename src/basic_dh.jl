@@ -43,9 +43,8 @@ struct basic_dh{T}
                                 zero(T), zero(T), zero(T), one(T))
         return new{T}(mat)
     end
-    function basic_dh(mat::SMatrix{4,4,T,16}) where {T}
-        return new{T}(mat)
-    end
+    basic_dh(s::T) where {T} = basic_dh(s * one(SMatrix{3,3,T,9}))
+    basic_dh(mat::SMatrix{4,4,T,16}) where {T} = new{T}(mat)
 end
 
 """

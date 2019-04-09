@@ -72,7 +72,7 @@ export
   basic_dh,
   dh_R_t,
   povray_12,
-  dh_vector_mul,
+  dh_vector_mul
 
   # # matrix_factor_derivatives.jl
   # cholesky_U_deravitive

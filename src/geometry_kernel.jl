@@ -1,8 +1,8 @@
 
 ### TRIANGLE
-area(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T} = norm(vector_area(v1, v2, v3)) * 0.5
+area(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T} = norm(vector_area(v1, v2, v3))
 centroid(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T} = (v1 + v2 + v3) * Float64(1/3)  # 4 times faster than dividing by 3
-vector_area(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T} = cross(v2 - v1, v3 - v2)
+vector_area(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T} = cross(v2 - v1, v3 - v2) * 0.5
 function triangleCross(v1::SVector{3,T}, v2::SVector{3,T}, v3::SVector{3,T}) where {T}
     Base.depwarn("triangleCross is depricated use vectorArea instead.", :triangleCross)
     return cross(v2 - v1, v3 - v2)

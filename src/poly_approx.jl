@@ -70,36 +70,36 @@ end
 
 #############################################################
 
-smooth_c1_ramp(v1::T, v2::T) where {T} = v2 * smooth_c1_ramp(safe_scalar_divide(v1, v2))
-function smooth_c1_ramp(t::T) where {T}
-    # y(t) = 1.5 * t - 0.5 * t^3 -- satisfies the following derivative conditions
-    #
-    #  0 = y(0) = ÿ(0) = ẏ(1) = ẏ(-1)
-    #  1 = y(1)
-    # -1 = y(-1)
-
-    if 1 <= abs(t)
-        return sign(t) * one(T)
-    else
-        return 0.5 * t * (3 - t * t)
-    end
-end
-
-smooth_c2_ramp(v1::T, v2::T) where {T} = v2 * smooth_c2_ramp(safe_scalar_divide(v1, v2))
-function smooth_c2_ramp(t::T) where {T}
-    # y(t) = 1.875 * t - 1.25 * t^3 + 0.375 * t^5 -- satisfies the following derivative conditions
-    #
-    #  0 = y(0) = ÿ(0) = y⁴(0) = ẏ(1) = ẏ(-1) = ÿ(1) = ÿ(-1)
-    #  1 = y(1)
-    # -1 = y(-1)
-
-    if 1 <= abs(t)
-        return sign(t) * one(T)
-    else
-        t² = t * t
-        return 0.125 * t * (15 + t² * (3 * t² - 10))
-    end
-end
+# smooth_c1_ramp(v1::T, v2::T) where {T} = v2 * smooth_c1_ramp(safe_scalar_divide(v1, v2))
+# function smooth_c1_ramp(t::T) where {T}
+#     # y(t) = 1.5 * t - 0.5 * t^3 -- satisfies the following derivative conditions
+#     #
+#     #  0 = y(0) = ÿ(0) = ẏ(1) = ẏ(-1)
+#     #  1 = y(1)
+#     # -1 = y(-1)
+#
+#     if 1 <= abs(t)
+#         return sign(t) * one(T)
+#     else
+#         return 0.5 * t * (3 - t * t)
+#     end
+# end
+#
+# smooth_c2_ramp(v1::T, v2::T) where {T} = v2 * smooth_c2_ramp(safe_scalar_divide(v1, v2))
+# function smooth_c2_ramp(t::T) where {T}
+#     # y(t) = 1.875 * t - 1.25 * t^3 + 0.375 * t^5 -- satisfies the following derivative conditions
+#     #
+#     #  0 = y(0) = ÿ(0) = y⁴(0) = ẏ(1) = ẏ(-1) = ÿ(1) = ÿ(-1)
+#     #  1 = y(1)
+#     # -1 = y(-1)
+#
+#     if 1 <= abs(t)
+#         return sign(t) * one(T)
+#     else
+#         t² = t * t
+#         return 0.125 * t * (15 + t² * (3 * t² - 10))
+#     end
+# end
 
 
 # function fastSigmoid(x::T) where {T}

@@ -13,6 +13,7 @@ v4 = SVector{3,Float64}(0.0, 0.0, 1.0)
         @test centroid(tri_rep...) ≈ SVector{3,Float64}(1/3,1/3,0)
         @test triangleNormal(tri_rep...) ≈ SVector{3,Float64}(0,0,1)
     end
+    @test triangle_area(tri_Sep, triangleNormal(tri_Sep...)) ≈ 0.5
 end
 
 @testset "tetrahedron" begin

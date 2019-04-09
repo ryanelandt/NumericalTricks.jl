@@ -24,6 +24,8 @@ export
   centroid,
   triangleCross,
   triangleNormal,
+  triangle_area,
+  vector_area,
   volume,
 
   # poly_approx.jl

@@ -15,7 +15,7 @@ include("rotations.jl")
 include("vector_projections.jl")
 include("utility.jl")
 include("basic_dh.jl")
-include("matrix_factor_derivatives.jl")
+# include("matrix_factor_derivatives.jl")
 
 
 export
@@ -74,7 +74,7 @@ export
   povray_12,
   dh_vector_mul,
 
-  # matrix_factor_derivatives.jl
-  cholesky_U_deravitive
+  # # matrix_factor_derivatives.jl
+  # cholesky_U_deravitive
 
 end

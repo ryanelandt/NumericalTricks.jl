@@ -22,7 +22,6 @@ export
   # geometry_kernel.jl
   area,
   centroid,
-  triangleCross,
   triangleNormal,
   triangle_area,
   vector_area,

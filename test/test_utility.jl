@@ -19,3 +19,18 @@
         @test (0.0 < minimum(eigen(pd33).values))
     end
 end
+
+@testset "padding" begin
+    v3 = SVector{3,Float64}(7, 8, 9)
+    v3_1 = SVector{4,Float64}(v3..., 1)
+    v3_0 = SVector{4,Float64}(v3..., 0)
+
+    @test unPad(v3_1) == v3
+    @test unPad(SMatrix{1,4,Float64,4}(v3_1...)) == v3
+    @test onePad(v3) == v3_1
+    @test zeroPad(v3) == v3_0
+
+    M = SMatrix{4,4,Float64,16}(randn(16))
+    @test mul_then_un_pad(M, v3_1) == unPad(M * v3_1)
+    @test one_pad_then_mul(M, v3) == M * onePad(v3)
+end

@@ -57,6 +57,9 @@ end
             @test unsafe_normalize(rv) ≈ rv_normalize
             @test safe_inv_norm²(rv) ≈ inv_rv_norm^2
         end
+        @test zero(T) == safe_scalar_divide(zero(T), rand(T) + 0.5)
+        @test zero(T) == safe_scalar_divide(zero(T), zero(T))
+        @test_throws ErrorException safe_scalar_divide(one(T), zero(T))
     end
 end
 

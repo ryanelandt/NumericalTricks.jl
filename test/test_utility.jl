@@ -1,4 +1,10 @@
 
+@testset "3_of_6" begin
+    a = SVector{6,Float64}(1,2,3,4,5,6)
+    @test all(first_3_of_6(a) .== SVector{3,Float64}(1,2,3))
+    @test all(last_3_of_6(a) .== SVector{3,Float64}(4,5,6))
+end
+
 @testset "utility" begin
     p1 = SVector{3,Float64}(1.0, 2.0, 3.0)
     p2 = SVector{3,Float64}(2.0, 3.0, 4.0)

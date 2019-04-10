@@ -39,6 +39,15 @@
     @test R == sm33_rand
     @test t == t_rand
 
+    # Scale 3
+    dh = basic_dh(scale=t_rand)
+    @test dh.mat == diagm(0=>[t_rand..., 1.0])
+
+    # Scale constant
+    c = 9.0
+    dh = basic_dh(c)
+    @test dh.mat == diagm(0=>[c, c, c, 1.0])
+
     # SMatrix only
     @test sm44_I == basic_dh(sm33_I).mat
     R, t = dh_R_t(basic_dh(sm33_rand))
@@ -54,5 +63,13 @@
 
     # povray_12
     @test all( povray_12(dh_rand) .== SVector(rot_rand..., t_rand...) )
+
+    # one
+    @test one(basic_dh{Float64}).mat == zeros(4, 4) + I
+
+    # dh_vector_mul
+    p_rand = rand(SVector{3,Float64})
+    dh = basic_dh(rot_rand, t_rand)
+    @test dh_vector_mul(dh, p_rand) == rot_rand * p_rand + t_rand
 
 end

@@ -40,7 +40,7 @@
     @test t == t_rand
 
     # Scale 3
-    dh = basic_dh(scale=t_rand)
+    dh = basic_dh(Diagonal(t_rand))
     @test dh.mat == diagm(0=>[t_rand..., 1.0])
 
     # Scale constant

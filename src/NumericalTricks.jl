@@ -53,6 +53,7 @@ export
   # vector_projections.jl
   vec_proj,
   vec_sub_vec_proj,
+  a_dot_one_pad_b,
 
   # utility.jl
   first_3_of_6,

@@ -14,9 +14,6 @@ for funName in (:area, :centroid, :triangleNormal, :triangleCross)
         function $funName(sv::SVector{3,SVector{3,T}}) where {T}
             return $funName(sv[1], sv[2], sv[3])
         end
-        # function $funName(sv::NTuple{3,SVector{3,T}}) where {T}
-        #     return $funName(sv[1], sv[2], sv[3])
-        # end
     end
 end
 
@@ -45,8 +42,5 @@ for funName in (:centroid, :volume)
         function $funName(sv::SVector{4,SVector{3,T}}) where {T}
             return $funName(sv[1], sv[2], sv[3], sv[4])
         end
-        # function $funName(sv::NTuple{4,SVector{3,T}}) where {T}
-        #     return $funName(sv[1], sv[2], sv[3], sv[4])
-        # end
     end
 end

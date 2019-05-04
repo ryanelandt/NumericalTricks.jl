@@ -27,23 +27,23 @@ export
   vector_area,
   volume,
 
-  # poly_approx.jl
-  fastSoftPlus,
-  fastSigmoid,
-  soft_clamp,
-  # smooth_c1_ramp,
-  # smooth_c2_ramp,
+  # # poly_approx.jl
+  # fastSoftPlus,
+  # fastSigmoid,
+  # soft_clamp,
+  # # smooth_c1_ramp,
+  # # smooth_c2_ramp,
 
-  # div_by_zero.jl
-  safe_normalize,
-  unsafe_normalize,
-  safe_inv_norm²,
-  safe_inv_norm,
-  safe_norm,
-  norm²,
-  safe_scalar_divide,
-  unsafe_norm,
-  unsafe_inv_norm,
+  # # div_by_zero.jl
+  # safe_normalize,
+  # unsafe_normalize,
+  # safe_inv_norm²,
+  # safe_inv_norm,
+  # safe_norm,
+  # norm²,
+  # safe_scalar_divide,
+  # unsafe_norm,
+  # unsafe_inv_norm,
 
   # rotations.jl
   quatErr,
